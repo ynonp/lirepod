@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Search, Headphones, Mail, X } from 'lucide-react';
+import Image from 'next/image';
 
 export type PodcastInfo = {
   id: number,
@@ -12,46 +13,45 @@ export type PodcastInfo = {
   episodes: number
 }
 
+const allPodcasts = [
+  {
+    id: 1,
+    title: "The Daily",
+    publisher: "The New York Times",
+    image: "/api/placeholder/64/64",
+    subscribers: 245000,
+    episodes: 1240
+  },
+  {
+    id: 2,
+    title: "Hardcore History",
+    publisher: "Dan Carlin",
+    image: "/api/placeholder/64/64",
+    subscribers: 180000,
+    episodes: 68
+  },
+  {
+    id: 3,
+    title: "Crime Daily",
+    publisher: "Crime Network",
+    image: "/api/placeholder/64/64",
+    subscribers: 125000,
+    episodes: 890
+  },
+  {
+    id: 4,
+    title: "Developer Tea",
+    publisher: "Spec Network",
+    image: "/api/placeholder/64/64",
+    subscribers: 95000,
+    episodes: 456
+  }
+];
+
 const LandingPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [filteredResults, setFilteredResults] = useState<Array<PodcastInfo>>([]);
+  const [filteredResults, setFilteredResults] = useState<Array<PodcastInfo>>([]);    
   
-  // Mock database of podcasts - in a real app, this would come from an API
-  const allPodcasts = [
-    {
-      id: 1,
-      title: "The Daily",
-      publisher: "The New York Times",
-      image: "/api/placeholder/64/64",
-      subscribers: 245000,
-      episodes: 1240
-    },
-    {
-      id: 2,
-      title: "Hardcore History",
-      publisher: "Dan Carlin",
-      image: "/api/placeholder/64/64",
-      subscribers: 180000,
-      episodes: 68
-    },
-    {
-      id: 3,
-      title: "Crime Daily",
-      publisher: "Crime Network",
-      image: "/api/placeholder/64/64",
-      subscribers: 125000,
-      episodes: 890
-    },
-    {
-      id: 4,
-      title: "Developer Tea",
-      publisher: "Spec Network",
-      image: "/api/placeholder/64/64",
-      subscribers: 95000,
-      episodes: 456
-    }
-  ];
-
   // Debounced search effect
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -132,7 +132,7 @@ const LandingPage = () => {
                     className="p-4 border-b last:border-b-0 hover:bg-gray-50 transition-colors cursor-pointer"
                   >
                     <div className="flex items-center space-x-4">
-                      <img
+                      <Image
                         src={podcast.image}
                         alt={podcast.title}
                         className="w-16 h-16 rounded-lg object-cover"
